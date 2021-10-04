@@ -34,7 +34,7 @@ public class ParkingLotObserver {
         }
     }
 
-    boolean isCapacityFull() {
+    boolean isCapacityNotFull() {
         return currentCapacity > 0 && currentCapacity <= actualCapacity;
     }
 
