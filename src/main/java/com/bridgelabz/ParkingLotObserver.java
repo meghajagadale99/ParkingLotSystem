@@ -8,7 +8,7 @@ public class ParkingLotObserver {
     private int actualCapacity;
     private int currentCapacity;
     private int index = -1;
-    private final double parkingLotCharge_preHour = 5.60;
+    private ParkingAttendant parkingAttendant = new ParkingAttendant();
     private List<VehicleDetails> listOfVehicle = new ArrayList<>();
 
     void setActualCapacity(int value) {
@@ -19,6 +19,7 @@ public class ParkingLotObserver {
     void addVehicle(VehicleDetails vehicle) {
         if (listOfVehicle.size() < actualCapacity) {
             listOfVehicle.add(vehicle);
+            parkingAttendant.parkingCarInParkingAreaOfCar(vehicle);
             currentCapacity--;
         }
     }
@@ -28,6 +29,7 @@ public class ParkingLotObserver {
         for (VehicleDetails v : listOfVehicle) {
             if ((v.getEndTime()).compareTo(vehicle.getStartTime()) < 0) {
                 listOfVehicle.remove(count);
+                parkingAttendant.unParkingCarInParkingAreaOfCar(vehicle, count);
                 currentCapacity++;
             }
             count++;
@@ -38,6 +40,7 @@ public class ParkingLotObserver {
         findVehicleDetails(vehicle);
         if (index >= 0) {
             listOfVehicle.remove(index);
+            parkingAttendant.unParkingCarInParkingAreaOfCar(vehicle, index);
             currentCapacity++;
         }
     }
