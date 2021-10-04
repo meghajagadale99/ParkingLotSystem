@@ -16,25 +16,25 @@ public class ParkingLotSystemTest {
 
     @Test
     void givenVehicle_whenParked_ShouldReturnTrue() {
-        try{
+        try {
             parkingLotSystem.setActualCapacity(1);
             parkingLotSystem.park(new Vehicle("maruti", "MP04B2544"));
             boolean isParked = parkingLotSystem.park(new Vehicle("maruti", "MP04B2544"));
             assertTrue(isParked);
-        }catch (ParkingLotException e){
+        } catch (ParkingLotException e) {
             assertEquals("parkingLot is full", e.getMessage());
         }
     }
 
     @Test
     void givenVehicle_WhenUnParked_ShouldReturnTrue() {
-        try{
+        try {
             parkingLotSystem.setActualCapacity(1);
-            parkingLotSystem.park(new Vehicle("maruti","MP04B2544"));
+            parkingLotSystem.park(new Vehicle("maruti", "MP04B2544"));
             boolean isUnParked = parkingLotSystem.unParked(new Vehicle("maruti", "MP04B2544"));
             assertTrue(isUnParked);
-        }catch (ParkingLotException e){
-            assertEquals("vehicle not parked yet",e.getMessage());
+        } catch (ParkingLotException e) {
+            assertEquals("vehicle not parked yet", e.getMessage());
         }
     }
 
@@ -44,8 +44,8 @@ public class ParkingLotSystemTest {
         try {
             parkingLotSystem.park(new Vehicle("honda", "BA05G8799"));
             parkingLotSystem.park(new Vehicle("HERO", "BA0548799"));
-        }catch (ParkingLotException e){
-            assertEquals("parkingLot is full",e.getMessage());
+        } catch (ParkingLotException e) {
+            assertEquals("parkingLot is full", e.getMessage());
         }
     }
 }
