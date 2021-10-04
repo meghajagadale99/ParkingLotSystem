@@ -29,8 +29,9 @@ public class VehicleDetails {
         return endTime;
     }
 
-    public VehicleDetails.VehicleType getVehicleType() {
-        return vehicleType;
+
+    public String getStartTime() {
+        return startTime;
     }
 
     @Override
