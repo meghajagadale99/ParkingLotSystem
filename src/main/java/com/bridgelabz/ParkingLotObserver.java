@@ -14,7 +14,7 @@ public class ParkingLotObserver {
         this.actualCapacity = value;
     }
 
-    public void setCurrentTime(double currentTime) {
+    void setCurrentTime(double currentTime) {
         this.currentTime = currentTime;
     }
 
@@ -54,7 +54,7 @@ public class ParkingLotObserver {
         return index >= 0;
     }
 
-    public double timeLeftToSpaceAgain() {
+    double timeLeftToSpaceAgain() {
         double nearestTime = listOfVehicle.get(0).getEndTime();
         for (Vehicle vehicleData : listOfVehicle) {
             if (nearestTime > vehicleData.getEndTime()) {
