@@ -7,40 +7,45 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotSystemTest {
     private ParkingLotSystem parkingLotSystem;
-    private Object vehicle;
+    private Vehicle vehicle;
 
     @BeforeEach
     void setUp() {
-        vehicle = new Object();
         parkingLotSystem = new ParkingLotSystem();
     }
 
     @Test
-    void givenVehicle_WhenParked_ShouldReturnTrue() throws ParkingLotException {
-        boolean isParked = parkingLotSystem.park(vehicle);
-        assertTrue(isParked);
+    void givenVehicle_whenParked_ShouldReturnTrue() {
+        try{
+            parkingLotSystem.setActualCapacity(1);
+            parkingLotSystem.park(new Vehicle("maruti", "MP04B2544"));
+            boolean isParked = parkingLotSystem.park(new Vehicle("maruti", "MP04B2544"));
+            assertTrue(isParked);
+        }catch (ParkingLotException e){
+            assertEquals("parkingLot is full", e.getMessage());
+        }
     }
 
     @Test
-    void givenVehicle_whenUnParked_shouldReturnTrue() throws ParkingLotException {
-        parkingLotSystem.park(vehicle);
-        boolean isUnParked = parkingLotSystem.unPark(vehicle);
-        assertTrue(isUnParked);
+    void givenVehicle_WhenUnParked_ShouldReturnTrue() {
+        try{
+            parkingLotSystem.setActualCapacity(1);
+            parkingLotSystem.park(new Vehicle("maruti","MP04B2544"));
+            boolean isUnParked = parkingLotSystem.unParked(new Vehicle("maruti", "MP04B2544"));
+            assertTrue(isUnParked);
+        }catch (ParkingLotException e){
+            assertEquals("vehicle not parked yet",e.getMessage());
+        }
     }
 
     @Test
-    void givenAVehicle_WhenAlreadyParked_ShouldReturnFalse() throws ParkingLotException {
-        parkingLotSystem.park(vehicle);
-        boolean isParked = parkingLotSystem.park(vehicle);
-        assertFalse(isParked);
-    }
-
-    @Test
-    void givenNoVehicle_ParkedShouldReturnException() {
+    void givenVehicle_WhenParkingLotIsFull_ShouldThrowException() throws ParkingLotException {
+        parkingLotSystem.setActualCapacity(2);
         try {
-            parkingLotSystem.park(null);
-        } catch (ParkingLotException e) {
-            assertEquals("vehicle not found", e.getMessage());
+            parkingLotSystem.park(new Vehicle("honda", "BA05G8799"));
+            parkingLotSystem.park(new Vehicle("HERO", "BA0548799"));
+        }catch (ParkingLotException e){
+            assertEquals("parkingLot is full",e.getMessage());
         }
     }
 }
