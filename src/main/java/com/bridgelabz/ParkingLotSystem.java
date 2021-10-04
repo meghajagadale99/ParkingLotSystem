@@ -17,10 +17,12 @@ public class ParkingLotSystem {
 
     public boolean park(Vehicle vehicle) throws ParkingLotException {
         boolean isCapacity = parkingLotObserver.isCapacityNotFull();
-        if (isCapacity) {
+        boolean isAvailable = parkingLotObserver.isVehicleAvailable(vehicle);
+        if (isCapacity && !isAvailable) {
             parkingLotObserver.addVehicle(vehicle);
             return true;
-        } else throw new ParkingLotException("parkingLot is full");
+        } else if (isAvailable) throw new ParkingLotException("vehicle already parked");
+        else throw new ParkingLotException("parkingLot is full");
     }
 
     public boolean unParked(Vehicle vehicle) throws ParkingLotException {
